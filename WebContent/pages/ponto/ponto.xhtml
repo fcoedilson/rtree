@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" 
+  	  xmlns:h="http://java.sun.com/jsf/html" 
+  	  xmlns:p="http://primefaces.org/ui">
+ 
+<!--  	  <p:messages autoUpdate="true" closable="true"/> -->
+ 	  
+ 	  	<h:inputHidden  id="lat" name="lat" value="#{pontoBean.lat}"/>
+		<h:inputHidden  id="lng" name="lng" value="#{pontoBean.lng}"/>
+		<h:inputHidden  id="selected_points" name="selected_points" value="#{pontoBean.points}"/>
+
+
+		<div id="floating-panel">
+		
+		<p:panelGrid columns="7">
+			<h:outputText value="Técnica:" />
+	        <p:selectOneRadio id="radioAvaliaMetodo" value="#{pontoBean.metodo}">
+	            <f:selectItem itemLabel="B-Tree" itemValue="B-Tree" />
+	            <f:selectItem itemLabel="R-Tree" itemValue="R-Tree" />
+	        </p:selectOneRadio>
+	        
+			<h:outputText value="Cenário:" style="margin-left: 30px"/>
+			<p:selectOneRadio id="radioAvaliaApp" value="#{pontoBean.avaliacao}">
+	            <f:selectItem itemLabel="Banco" itemValue="false" />
+	            <f:selectItem itemLabel="Aplicação" itemValue="true" />
+	        </p:selectOneRadio>
+			
+			<input onclick="clearMarkers();" type="button" value="Hide"/>
+			<input onclick="showMarkers();" type="button" value="Show"/>
+			<input onclick="deleteMarkers();" type="button" value="Del" style="margin-right: 20px"/>
+			
+			<p:commandLink value="Save" type="submit" action="#{pontoBean.save}" ajax="false" update="mainForm" />
+		</p:panelGrid>
+		</div>
+	
+		<input id="pac-input" type="text" autocomplete="off"  placeholder="Informe um ponto de interesse .." style="width:360px"/>
+
+	   	<div >
+	
+		   	<input type="radio" name="type" id="changetype-all" checked="checked"/>
+		   	<label for="changetype-all">Todos</label>
+		
+			<input type="radio" name="type" id="changetype-establishment"/>
+			<label for="changetype-establishment">Pontos de Interesse</label>
+				
+			<input type="radio" name="type" id="changetype-address"/>
+			<label for="changetype-address">Endereço</label>
+				
+			<input type="radio" name="type" id="changetype-geocode"/>
+			<label for="changetype-geocode">Geocodes</label>
+	   	</div>
+		
+		<div id="map" style="width:100%; height:600px"></div>
+
+</ui:composition>

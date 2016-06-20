@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/rtree">
+  <Resource auth="Container" 
+  			driverClassName="org.postgresql.Driver" 
+  			name="jdbc/rtree" 
+  			password="postgres" 
+  			type="javax.sql.DataSource" 
+  			url="jdbc:postgresql://localhost:5432/rtree" 
+  			username="postgres"/>
+</Context>
